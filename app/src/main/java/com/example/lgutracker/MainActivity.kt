@@ -1,5 +1,6 @@
 package com.example.lgutracker
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.webkit.WebView
@@ -9,6 +10,7 @@ class MainActivity : AppCompatActivity() {
 
 
     var mywebview: WebView? = null
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
+        mywebview!!.settings.javaScriptEnabled = true;
         mywebview!!.loadUrl("http://192.168.254.118")
     }
 }
