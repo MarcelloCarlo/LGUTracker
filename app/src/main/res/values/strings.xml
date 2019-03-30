@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">LGU GO Tracker</string>
-    <string name="web_view_example">LGU Tracker</string>
+    <string name="web_viewweessserver">Change Server</string>
+    <string name="server_url">Example: http://remoteAddress:portNumber/lguTrackingForm.html</string>
+    <string name="dev_change_server">(DEV) Change Server</string>
 </resources>
