@@ -4,22 +4,25 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
+import android.support.v4.app.Fragment
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.Toast
+import android.support.v4.content.ContextCompat.startActivity
+import android.content.Intent
+import android.net.Proxy.getHost
+import android.net.Uri
+
 
 class MainActivity : AppCompatActivity() {
 
 
-    private var mywebview: WebView? = null
-    private var url = "http://192.168.254.118:8080/lguTrackerForm.html"
+    var mywebview: WebView? = null
+    var url = "http://192.168.254.118:8080/lguTrackerForm.html"
     private var sharedPrefs: SharedPreferences? = null
     private var setReloadServer: SharedPreferences.Editor? = null
     private val LINK_ADDRESS = "LINK_ADDRESS"
@@ -90,17 +93,16 @@ class MainActivity : AppCompatActivity() {
             } else {
                 url = newUrl.toString()
             }
-                // do something
+            // do something
             /*findViewById<WebView>(R.id.webView)
             mywebview!!.loadUrl(url)
             mywebview!!.webViewClient = MyBrowser()*/
-            setReloadServer = sharedPrefs?.edit()
-            setReloadServer!!.putString(LINK_ADDRESS, url)
-            setReloadServer!!.apply()
-            val newServerInflate = LayoutInflater.from(this).inflate(R.layout.new_server_fragment, null, false)
-            mywebview = findViewById<WebView>(R.id.webViewNew)
             mywebview!!.setWebViewClient(MyBrowser())
+            mywebview!!.settings.javaScriptEnabled = true
+            mywebview!!.settings.allowContentAccess = true
+            mywebview!!.settings.domStorageEnabled = true
             mywebview!!.loadUrl(url)
+
             //onCreate( Bundle())
             Toast.makeText(this, "Loading: " + url, Toast.LENGTH_SHORT).show()
 
@@ -123,13 +125,40 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private inner class MyBrowser : WebViewClient() {
+    class MyBrowser : WebViewClient() {
 
         override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            /*view.loadUrl(url)
+            return true*/
+
+            /* val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+             view.context.startActivity(intent)*/
             view.loadUrl(url)
             return true
         }
 
 
     }
+
+    /* class newServerFragment : Fragment() {
+
+         var mywebview: WebView? = null
+         var urlNew: String = ""
+
+         companion object {
+
+             fun newInstance(url: String): newServerFragment {
+                 return newServerFragment()
+             }
+         }
+
+
+         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+             val rootView: View = inflater.inflate(R.layout.new_server_fragment, container, false)
+             mywebview = rootView.findViewById<WebView>(R.id.webViewNew)
+             mywebview!!.webViewClient = MyBrowser()
+             mywebview!!.loadUrl(url)
+             return rootView
+         }
+     }*/
 }
