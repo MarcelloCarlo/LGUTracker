@@ -87,6 +87,15 @@ class MainActivity : AppCompatActivity() {
         builder.show();
     }
 
+    override fun onBackPressed() {
+        if (mywebview!!.canGoBack()) {
+            mywebview!!.goBack()
+        } else {
+            super.onBackPressed()
+        }
+
+    }
+
 
     private inner class MyBrowser : WebViewClient() {
 
