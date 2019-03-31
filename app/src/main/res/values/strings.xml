@@ -3,4 +3,5 @@
     <string name="web_viewweessserver">Change Server</string>
     <string name="server_url">Example: http://remoteAddress:portNumber/lguTrackingForm.html</string>
     <string name="dev_change_server">(DEV) Change Server</string>
+    <string name="reload_page">Reload Page</string>
 </resources>

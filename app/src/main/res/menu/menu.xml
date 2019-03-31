@@ -4,4 +4,7 @@
     <item
             android:id="@+id/action_fav"
             android:title="@string/dev_change_server"/>
+    <item
+            android:id="@+id/reload_select"
+            android:title="@string/reload_page"/>
 </menu>
